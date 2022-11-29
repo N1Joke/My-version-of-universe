@@ -25,7 +25,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private void Start()
     {
-        _canvasScaleFactor = UIManager.Instance.GetCanvasScaleFactor();
+        _canvasScaleFactor = UiService.Instance.GetCanvasScaleFactor();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

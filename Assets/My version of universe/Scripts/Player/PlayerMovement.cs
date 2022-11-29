@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,15 +18,22 @@ public class PlayerMovement : MonoBehaviour
         Direct
     }
 
-    [SerializeField] private SimpleTouchController _leftController;    
     [SerializeField] private Animator _animator;
     [SerializeField] private ControlMode _controlMode = ControlMode.Direct;
     [SerializeField] private float _moveSpeed = 2;
+
+    public void Construct(SimpleTouchController touchController)
+    {
+        _touchController = touchController;
+    }
+
     [SerializeField] private float _turnSpeed = 200;
     [SerializeField] private float _jumpForce = 4;
     [Header("Swimming")]
     [SerializeField] private AnimationCurve _curveJumpOutOfWater;
     [SerializeField] private float _swimmingHeight;
+
+    private SimpleTouchController _touchController;
 
     private Rigidbody _rigidbody;
 
@@ -95,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //float v = Input.GetAxis("Vertical");
         //float h = Input.GetAxis("Horizontal");
-        float v = _leftController.GetTouchPosition.y;        
-        float h = _leftController.GetTouchPosition.x;
+        float v = _touchController.GetTouchPosition.y;        
+        float h = _touchController.GetTouchPosition.x;
 
         bool walk = Input.GetKey(KeyCode.LeftShift);
 
@@ -123,8 +131,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void DirectUpdate()
     {
-        float v = _leftController.GetTouchPosition.y;
-        float h = _leftController.GetTouchPosition.x;
+        float v = _touchController.GetTouchPosition.y;
+        float h = _touchController.GetTouchPosition.x;
         
         _currentV = Mathf.Lerp(_currentV, v, Time.deltaTime * _interpolation);
         _currentH = Mathf.Lerp(_currentH, h, Time.deltaTime * _interpolation);

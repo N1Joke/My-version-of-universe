@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-public class UIManager : MonoBehaviour
+public class UiService : MonoBehaviour
 {
-    [SerializeField] private Button _button;
+    [SerializeField] private Button _openMergebutton;
     [SerializeField] private MergeWindow _mergeWindow;
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private SimpleTouchController _touchController;
 
     [Header("Resource holder")]
     [SerializeField] private GameObject _tree;
@@ -30,17 +32,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _purpleCristalText;
     [SerializeField] private TextMeshProUGUI _garbageText;
 
-    public static UIManager Instance;
+    public SimpleTouchController TouchController => _touchController;
+
+    public static UiService Instance;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-    }
+    }    
 
     private void Start()
     {
-        _button.onClick.AddListener(OnClick);
+        _openMergebutton.onClick.AddListener(OnClick);
         _mergeWindow.gameObject.SetActive(false);
     }
 

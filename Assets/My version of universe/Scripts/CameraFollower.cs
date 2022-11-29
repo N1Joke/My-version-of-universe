@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class CameraFollower : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _target;
+    
     [SerializeField] private Vector3 _forwardDiraction;
     [SerializeField] private float _speed;
     [SerializeField] private float _angle;
@@ -15,6 +16,13 @@ public class CameraFollower : MonoBehaviour
     private Vector3 _nextPosition;
     private bool _follow = false;
     private Rigidbody _defaultTarget;
+    private Rigidbody _target;
+    
+    [Inject]
+    public void Construct(Player player)
+    {
+        _target = player.TargetRigitbody;
+    }
 
     private void Start()
     {

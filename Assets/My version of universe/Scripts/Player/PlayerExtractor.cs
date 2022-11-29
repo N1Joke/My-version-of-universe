@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerExtractor : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private UIManager _uIManager;
+    [SerializeField] private Animator _animator;   
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _attackSpeed = 0.75f;
     [SerializeField] private ToolSwitch _toolSwitch;
@@ -14,6 +13,7 @@ public class PlayerExtractor : MonoBehaviour
 
     private float _timeSinceLastAttack = 0f;
     private bool _isAttacking = false;
+    private UiService _uIManager;
 
     private void FixedUpdate()
     {
@@ -24,6 +24,11 @@ public class PlayerExtractor : MonoBehaviour
         }
 
         _timeSinceLastAttack += Time.fixedDeltaTime;
+    }
+
+    public void Construct(UiService uiService)
+    {
+        _uIManager = uiService;       
     }
 
     private void UpdateDamageToExtractables()
