@@ -9,7 +9,7 @@ public class TopDownPlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         var playerInstance = Container.InstantiatePrefabForComponent<Player>(_player, _spawnPoint.position, Quaternion.identity, null);
-        Container.Bind<Player>().FromInstance(_player).AsSingle().WithArguments(UiService.Instance);
+        Container.Bind<Player>().FromInstance(playerInstance).AsSingle().WithArguments(UiService.Instance);
         Container.QueueForInject(_player);
     }
 }

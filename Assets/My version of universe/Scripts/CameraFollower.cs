@@ -16,7 +16,7 @@ public class CameraFollower : MonoBehaviour
     private Vector3 _nextPosition;
     private bool _follow = false;
     private Rigidbody _defaultTarget;
-    private Rigidbody _target;
+    [SerializeField] private Rigidbody _target;
     
     [Inject]
     public void Construct(Player player)
